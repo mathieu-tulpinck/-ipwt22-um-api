@@ -3,20 +3,18 @@
 version: '3.4'
 
 services:
-  sqlserver:
+  db:
     image: mcr.microsoft.com/mssql/server:2019-latest
     ports:
       - 1433:1433
     environment:
       - SA_PASSWORD=Student1
       - ACCEPT_EULA=Y
-    networks:
-      - uuidmasterapi
     volumes:
       - sqlvolume:/var/opt/mssql
   api:
     depends_on:
-      - sqlserver
+      - db
     image: uuidmasterapi:dev
     build:
       context: .

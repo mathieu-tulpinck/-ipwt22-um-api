@@ -12,7 +12,7 @@ using UuidMasterApi;
 namespace UuidMasterApi.Migrations
 {
     [DbContext(typeof(UuidMasterApiDbContext))]
-    [Migration("20220506124456_InitialCreate")]
+    [Migration("20220506161544_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,7 +51,7 @@ namespace UuidMasterApi.Migrations
                     b.HasData(
                         new
                         {
-                            Uuid = new Guid("e59d5f02-7f3d-4140-9c84-5db1733abe99"),
+                            Uuid = new Guid("fed92226-4b82-47da-a0e5-85855faa9a17"),
                             EntityType = "user",
                             EntityVersion = 1m,
                             Source = 2,
