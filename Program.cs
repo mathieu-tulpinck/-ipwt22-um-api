@@ -1,9 +1,32 @@
+using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.EntityFrameworkCore;
+using UuidMasterApi;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// Reverse proxy.
+builder.Services.Configure<ForwardedHeadersOptions>(options => {
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+});
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Database.
+var connectionString =
+builder.Services.AddDbContext<UuidMasterApiDbContext>(
+    dbContextOptions => dbContextOptions.UseSqlServer(
+        builder.Configuration["ConnectionStrings:UuidMasterApiDbConnectionString"]
+    )
+);
+
+// Controllers
+builder.Services.AddControllers(options => {
+    options.ReturnHttpNotAcceptable = true;
+});
+
+// Entity-model mapper.
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+// Documentation.
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -16,7 +39,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();// Disabled due to reverse proxy in production.
 
 app.UseAuthorization();
 
