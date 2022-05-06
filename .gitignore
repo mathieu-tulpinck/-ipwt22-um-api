@@ -1,0 +1,8 @@
+/.vscode
+/bin
+/obj
+appsettings.Development.json
+appsettings.json
+UuidMasterApi.code-workspace
+Properties/launchSettings.json
+docker-compose.debug.yml
