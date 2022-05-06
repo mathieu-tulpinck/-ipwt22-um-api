@@ -6,3 +6,6 @@ appsettings.json
 UuidMasterApi.code-workspace
 Properties/launchSettings.json
 docker-compose.debug.yml
+appsettings.Production.json
+appsettings.Development.json
+docker-compose.production.yml
