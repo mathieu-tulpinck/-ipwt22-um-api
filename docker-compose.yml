@@ -26,6 +26,7 @@ services:
       - sqlvolume:/var/opt/mssql
   api:
     depends_on:
+      - reverseproxy
       - db
     image: uuidmasterapi:dev
     build:
