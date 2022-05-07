@@ -1,12 +1,12 @@
 /.vscode
 /bin
 /obj
+app.settings.Production.json
+appsettings.Development.json
 appsettings.Development.json
 appsettings.json
-UuidMasterApi.code-workspace
-Properties/launchSettings.json
-docker-compose.debug.yml
 appsettings.Production.json
-appsettings.Development.json
+docker-compose.debug.yml
 docker-compose.production.yml
-app.settings.Production.json
+Properties/launchSettings.json
+UuidMasterApi.code-workspace
