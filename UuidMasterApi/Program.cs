@@ -33,6 +33,9 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
+app.UsePathBase("/api");
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

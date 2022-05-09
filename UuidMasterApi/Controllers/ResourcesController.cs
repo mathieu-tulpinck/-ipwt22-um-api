@@ -9,7 +9,7 @@ using UuidMasterApi.Models;
 namespace UuidMaster.Api.Controllers
 {
     [ApiController]
-    [Route("api/resources")]
+    [Route("resources")]
     public class ResourcesController : ControllerBase
     {
         private readonly UuidMasterApiDbContext _context;
