@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "peg/by/7Naat3/2S3KgvlKCEKbNHSXwDKmWjMG+ksuArqSTM9+TUrodMYCkzM19ulwEmXS/F3QrV6RdLv6AQDA==",
+  "dgSpecHash": "smboewVTAHridKRuZQVWHKXqs0pCPktuo/+YejEGK3iSQghTxEDeznfXrbAA/dh9J0GxxeMPowk4JjoFFoENuw==",
   "success": true,
-  "projectFilePath": "/home/mathi/code/UuidMasterApi/UuidMasterApi.csproj",
+  "projectFilePath": "/home/mathi/code/UuidMasterApi/UuidMasterApi/UuidMasterApi.csproj",
   "expectedPackageFiles": [
     "/home/mathi/.nuget/packages/automapper/11.0.0/automapper.11.0.0.nupkg.sha512",
     "/home/mathi/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/11.0.0/automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",

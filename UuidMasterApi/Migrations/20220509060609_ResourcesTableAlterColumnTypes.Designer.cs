@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UuidMasterApi;
 
@@ -11,9 +12,10 @@ using UuidMasterApi;
 namespace UuidMasterApi.Migrations
 {
     [DbContext(typeof(UuidMasterApiDbContext))]
-    partial class UuidMasterApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220509060609_ResourcesTableAlterColumnTypes")]
+    partial class ResourcesTableAlterColumnTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,9 +38,8 @@ namespace UuidMasterApi.Migrations
                     b.Property<int>("EntityVersion")
                         .HasColumnType("int");
 
-                    b.Property<string>("Source")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(24)");
+                    b.Property<int>("Source")
+                        .HasColumnType("int");
 
                     b.Property<int>("SourceEntityId")
                         .HasColumnType("int");
@@ -50,10 +51,10 @@ namespace UuidMasterApi.Migrations
                     b.HasData(
                         new
                         {
-                            Uuid = new Guid("a40613f5-96ca-47ed-9e7c-b32103d36a9a"),
+                            Uuid = new Guid("6b084a13-3a05-4a0e-9464-5e6dd624b36b"),
                             EntityType = "user",
                             EntityVersion = 1,
-                            Source = "FrontEnd",
+                            Source = 2,
                             SourceEntityId = 1
                         });
                 });

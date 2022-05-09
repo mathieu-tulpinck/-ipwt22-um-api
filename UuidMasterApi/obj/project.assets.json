@@ -9900,11 +9900,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/mathi/code/UuidMasterApi/UuidMasterApi.csproj",
+      "projectUniqueName": "/home/mathi/code/UuidMasterApi/UuidMasterApi/UuidMasterApi.csproj",
       "projectName": "UuidMasterApi",
-      "projectPath": "/home/mathi/code/UuidMasterApi/UuidMasterApi.csproj",
+      "projectPath": "/home/mathi/code/UuidMasterApi/UuidMasterApi/UuidMasterApi.csproj",
       "packagesPath": "/home/mathi/.nuget/packages/",
-      "outputPath": "/home/mathi/code/UuidMasterApi/obj/",
+      "outputPath": "/home/mathi/code/UuidMasterApi/UuidMasterApi/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/mathi/.nuget/NuGet/NuGet.Config"
