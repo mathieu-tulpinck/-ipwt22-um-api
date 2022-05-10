@@ -12,19 +12,19 @@ namespace UuidMasterApi.Entities
         [Column(TypeName = "nvarchar(24)")]
         public SourceType Source { get; set; }
         [Required]
-        public int SourceEntityId { get; set; }
-        [Required]
         [MaxLength(50)]
         public string EntityType { get; set; }// Enum?
         [Required]
+        public int SourceEntityId { get; set; }
+        [Required]
         public int EntityVersion { get; set; }
 
-        public Resource(SourceType source, int sourceEntityId, string entityType, int entityVersion)
+        public Resource(SourceType source, string entityType, int sourceEntityId, int entityVersion)
         {
             Uuid = Guid.NewGuid();
             Source = source;
-            SourceEntityId = sourceEntityId;
             EntityType = entityType;
+            SourceEntityId = sourceEntityId;
             EntityVersion = entityVersion;
         }
 

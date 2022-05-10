@@ -2,7 +2,9 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using UuidMasterApi.Entities;
+using UuidMasterApi.Enums;
 using UuidMasterApi.Models;
 
 namespace UuidMasterApi.Controllers
@@ -32,6 +34,21 @@ namespace UuidMasterApi.Controllers
         public async Task<ActionResult<ResourceDto>> GetResource(Guid uuid) 
         {
             var resourceEntity = await _context.Resources.Where(r => r.Uuid == uuid).FirstOrDefaultAsync();
+            if (resourceEntity == null) {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<ResourceDto>(resourceEntity));
+        }
+
+        [HttpGet("search")]
+        public async Task<ActionResult<ResourceDto>> GetResource([Required(ErrorMessage = "source field is required.")] string source, [Required(ErrorMessage = "entityType field is required.")] string entityType, [Required(ErrorMessage = "sourceEntityId field is required.")] int sourceEntityId)
+        {
+            var resourceEntity = await _context.Resources
+                .Where(r => r.Source == Enum.Parse<SourceType>(source))
+                .Where(r => r.EntityType == entityType)
+                .Where(r => r.SourceEntityId == sourceEntityId)
+                .FirstOrDefaultAsync();
             if (resourceEntity == null) {
                 return NotFound();
             }
