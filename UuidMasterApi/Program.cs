@@ -21,7 +21,7 @@ builder.Services.AddDbContext<UuidMasterApiDbContext>(
 // Controllers
 builder.Services.AddControllers(options => {
     options.ReturnHttpNotAcceptable = true;
-});
+}).AddNewtonsoftJson();
 
 // Entity-model mapper.
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -33,6 +33,9 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
+app.UsePathBase("/api");
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -41,12 +44,18 @@ if (app.Environment.IsDevelopment())
 
 // app.UseHttpsRedirection();// Disabled due to reverse proxy in production.
 
+app.UseRouting();
+
 app.UseAuthorization();
 
-app.MapControllers();
-
-app.Run(async (context) => {
-   await context.Response.WriteAsync("Hello test!");
+app.UseEndpoints(endpoints => {
+    endpoints.MapControllers();
 });
 
+// app.Run(async (context) => {
+//    await context.Response.WriteAsync("Hello test!");
+// });
+
 app.Run();
+
+public partial class Program { } // Required to reference class from tests.

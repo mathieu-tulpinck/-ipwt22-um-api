@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UuidMasterApi;
 
@@ -11,9 +12,10 @@ using UuidMasterApi;
 namespace UuidMasterApi.Migrations
 {
     [DbContext(typeof(UuidMasterApiDbContext))]
-    partial class UuidMasterApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220509060609_ResourcesTableAlterColumnTypes")]
+    partial class ResourcesTableAlterColumnTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,14 +35,14 @@ namespace UuidMasterApi.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<decimal>("EntityVersion")
-                        .HasColumnType("decimal(20,0)");
+                    b.Property<int>("EntityVersion")
+                        .HasColumnType("int");
 
                     b.Property<int>("Source")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("SourceEntityId")
-                        .HasColumnType("decimal(20,0)");
+                    b.Property<int>("SourceEntityId")
+                        .HasColumnType("int");
 
                     b.HasKey("Uuid");
 
@@ -49,11 +51,11 @@ namespace UuidMasterApi.Migrations
                     b.HasData(
                         new
                         {
-                            Uuid = new Guid("e59d5f02-7f3d-4140-9c84-5db1733abe99"),
+                            Uuid = new Guid("6b084a13-3a05-4a0e-9464-5e6dd624b36b"),
                             EntityType = "user",
-                            EntityVersion = 1m,
+                            EntityVersion = 1,
                             Source = 2,
-                            SourceEntityId = 1m
+                            SourceEntityId = 1
                         });
                 });
 #pragma warning restore 612, 618

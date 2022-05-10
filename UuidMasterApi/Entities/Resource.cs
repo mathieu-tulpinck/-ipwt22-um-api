@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using UuidMasterApi.Enums;
 
 namespace UuidMasterApi.Entities
@@ -7,22 +8,23 @@ namespace UuidMasterApi.Entities
     {
         [Key]
         public Guid Uuid { get; set; }
-        [Required]// Adds a non-nullable constraint to the db schema. 
+        [Required]// Adds a non-nullable constraint to the db schema.
+        [Column(TypeName = "nvarchar(24)")]
         public SourceType Source { get; set; }
-        [Required]
-        public ulong SourceEntityId { get; set; }// (unsigned) Int 64 corresponds to bigint in mysql
         [Required]
         [MaxLength(50)]
         public string EntityType { get; set; }// Enum?
         [Required]
-        public ulong EntityVersion { get; set; }
+        public int SourceEntityId { get; set; }
+        [Required]
+        public int EntityVersion { get; set; }
 
-        public Resource(SourceType source, ulong sourceEntityId, string entityType, ulong entityVersion)
+        public Resource(SourceType source, string entityType, int sourceEntityId, int entityVersion)
         {
             Uuid = Guid.NewGuid();
             Source = source;
-            SourceEntityId = sourceEntityId;
             EntityType = entityType;
+            SourceEntityId = sourceEntityId;
             EntityVersion = entityVersion;
         }
 

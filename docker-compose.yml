@@ -3,8 +3,18 @@
 version: '3.4'
 
 services:
-  sqlserver:
+  reverseproxy:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    networks:
+      - uuidmasterapi
+  db:
     image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: uuidmasterapi-db-1
+    hostname: uuidmasterapi-db-1
     ports:
       - 1433:1433
     environment:
@@ -16,14 +26,14 @@ services:
       - sqlvolume:/var/opt/mssql
   api:
     depends_on:
-      - sqlserver
+      - reverseproxy
+      - db
     image: uuidmasterapi:dev
     build:
-      context: .
-      dockerfile: ./Dockerfile
-    ports:
-      - 5000:5000
-      # - 5001:5001
+      context: ./UuidMasterApi
+      dockerfile: Dockerfile
+    expose:
+      - "5000"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     networks:

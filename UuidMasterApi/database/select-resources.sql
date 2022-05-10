@@ -1,0 +1,6 @@
+SELECT TOP (20) [Uuid]
+      ,[Source]
+      ,[SourceEntityId]
+      ,[EntityType]
+      ,[EntityVersion]
+  FROM [uuidmasterapi].[dbo].[Resources]

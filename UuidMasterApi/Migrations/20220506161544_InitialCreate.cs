@@ -27,7 +27,7 @@ namespace UuidMasterApi.Migrations
             migrationBuilder.InsertData(
                 table: "Resources",
                 columns: new[] { "Uuid", "EntityType", "EntityVersion", "Source", "SourceEntityId" },
-                values: new object[] { new Guid("e59d5f02-7f3d-4140-9c84-5db1733abe99"), "user", 1m, 2, 1m });
+                values: new object[] { new Guid("fed92226-4b82-47da-a0e5-85855faa9a17"), "user", 1m, 2, 1m });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
