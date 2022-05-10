@@ -12,8 +12,8 @@ using UuidMasterApi;
 namespace UuidMasterApi.Migrations
 {
     [DbContext(typeof(UuidMasterApiDbContext))]
-    [Migration("20220506161544_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220510084402_BaseMigration")]
+    partial class BaseMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,28 +35,19 @@ namespace UuidMasterApi.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<decimal>("EntityVersion")
-                        .HasColumnType("decimal(20,0)");
-
-                    b.Property<int>("Source")
+                    b.Property<int>("EntityVersion")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("SourceEntityId")
-                        .HasColumnType("decimal(20,0)");
+                    b.Property<string>("Source")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(24)");
+
+                    b.Property<int>("SourceEntityId")
+                        .HasColumnType("int");
 
                     b.HasKey("Uuid");
 
                     b.ToTable("Resources");
-
-                    b.HasData(
-                        new
-                        {
-                            Uuid = new Guid("fed92226-4b82-47da-a0e5-85855faa9a17"),
-                            EntityType = "user",
-                            EntityVersion = 1m,
-                            Source = 2,
-                            SourceEntityId = 1m
-                        });
                 });
 #pragma warning restore 612, 618
         }

@@ -50,7 +50,7 @@ namespace UuidMasterApi.Migrations
                     b.HasData(
                         new
                         {
-                            Uuid = new Guid("a40613f5-96ca-47ed-9e7c-b32103d36a9a"),
+                            Uuid = new Guid("1a908081-21d3-4f28-952d-584f4490b3a8"),
                             EntityType = "user",
                             EntityVersion = 1,
                             Source = "FrontEnd",

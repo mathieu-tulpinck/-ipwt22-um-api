@@ -12,8 +12,8 @@ using UuidMasterApi;
 namespace UuidMasterApi.Migrations
 {
     [DbContext(typeof(UuidMasterApiDbContext))]
-    [Migration("20220509060609_ResourcesTableAlterColumnTypes")]
-    partial class ResourcesTableAlterColumnTypes
+    [Migration("20220510084455_InitialSeed")]
+    partial class InitialSeed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,8 +38,9 @@ namespace UuidMasterApi.Migrations
                     b.Property<int>("EntityVersion")
                         .HasColumnType("int");
 
-                    b.Property<int>("Source")
-                        .HasColumnType("int");
+                    b.Property<string>("Source")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(24)");
 
                     b.Property<int>("SourceEntityId")
                         .HasColumnType("int");
@@ -51,10 +52,10 @@ namespace UuidMasterApi.Migrations
                     b.HasData(
                         new
                         {
-                            Uuid = new Guid("6b084a13-3a05-4a0e-9464-5e6dd624b36b"),
+                            Uuid = new Guid("1a908081-21d3-4f28-952d-584f4490b3a8"),
                             EntityType = "user",
                             EntityVersion = 1,
-                            Source = 2,
+                            Source = "FrontEnd",
                             SourceEntityId = 1
                         });
                 });
