@@ -2,11 +2,10 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
-using UuidMasterApi;
 using UuidMasterApi.Entities;
 using UuidMasterApi.Models;
 
-namespace UuidMaster.Api.Controllers
+namespace UuidMasterApi.Controllers
 {
     [ApiController]
     [Route("resources")]

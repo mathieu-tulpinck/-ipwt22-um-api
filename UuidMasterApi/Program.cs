@@ -57,3 +57,5 @@ app.UseEndpoints(endpoints => {
 // });
 
 app.Run();
+
+public partial class Program { } // Required to reference class from tests.
