@@ -3,44 +3,46 @@
 version: '3.4'
 
 services:
-  reverseproxy:
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    ports:
-      - 80:80
-    networks:
-      - uuidmasterapi
   db:
     image: mcr.microsoft.com/mssql/server:2019-latest
     container_name: uuidmasterapi-db-1
     hostname: uuidmasterapi-db-1
     ports:
-      - 1433:1433
+      - "1433:1433" # Publishes the port to docker host in order to access db from vscode extension. 
     environment:
       - SA_PASSWORD=Student1
       - ACCEPT_EULA=Y
     networks:
       - uuidmasterapi
     volumes:
-      - sqlvolume:/var/opt/mssql
+      - db_data:/var/opt/mssql
   api:
     depends_on:
-      - reverseproxy
       - db
     image: uuidmasterapi:dev
     build:
       context: ./UuidMasterApi
       dockerfile: Dockerfile
-    expose:
-      - "5000"
+    ports: # replace by expose
+      - "5000:5000"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     networks:
       - uuidmasterapi
+  # reverseproxy:
+  #   depends_on:
+  #     - api
+  #   build:
+  #     context: ./nginx
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8080:8080"
+  #   networks:
+  #     - uuidmasterapi
 
 networks:
   uuidmasterapi:
+    name: uuidmasterapi
     driver: bridge
 volumes:
-  sqlvolume:
+  db_data:
