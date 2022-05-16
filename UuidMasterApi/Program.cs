@@ -1,5 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using UuidMasterApi;
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.Console()
+    .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 // builder.Services.Configure<ForwardedHeadersOptions>(options => {
 //     options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
 // });
+
+// Log
+builder.Host.UseSerilog();
 
 // Database.
 var connectionString =
