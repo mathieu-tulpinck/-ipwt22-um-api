@@ -95,5 +95,7 @@ namespace UuidMasterApi.Controllers
 
             return NoContent();
         }
+
+        // Delete action not yet implemented.
     }
 }
