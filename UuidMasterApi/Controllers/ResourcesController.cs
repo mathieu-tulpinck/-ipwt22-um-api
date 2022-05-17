@@ -57,9 +57,9 @@ namespace UuidMasterApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ResourceDto>> CreateResource(ResourceCreateDto resourcePostDto) 
+        public async Task<ActionResult<ResourceDto>> CreateResource(ResourceCreateDto resourceCreateDto) 
         {
-            var resourceEntity = _mapper.Map<Resource>(resourcePostDto); // Assigns uuid to entity.
+            var resourceEntity = _mapper.Map<Resource>(resourceCreateDto); // Assigns uuid to entity.
             _context.Resources.Add(resourceEntity);
             await _context.SaveChangesAsync();
             var resourceDto = _mapper.Map<ResourceDto>(resourceEntity);

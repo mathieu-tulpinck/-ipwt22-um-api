@@ -1,14 +1,22 @@
-using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using UuidMasterApi;
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.Console()
+    .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Reverse proxy.
-builder.Services.Configure<ForwardedHeadersOptions>(options => {
-    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
-});
+// builder.Services.Configure<ForwardedHeadersOptions>(options => {
+//     options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+// });
+
+// Log
+builder.Host.UseSerilog();
 
 // Database.
 var connectionString =
@@ -33,7 +41,6 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
 app.UsePathBase("/api");
 
 if (app.Environment.IsDevelopment())
@@ -42,7 +49,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// app.UseHttpsRedirection();// Disabled due to reverse proxy in production.
+// app.UseHttpsRedirection(); // SSL not configured.
 
 app.UseRouting();
 
@@ -52,9 +59,9 @@ app.UseEndpoints(endpoints => {
     endpoints.MapControllers();
 });
 
-// app.Run(async (context) => {
-//    await context.Response.WriteAsync("Hello test!");
-// });
+app.Run(async (context) => {
+   await context.Response.WriteAsync("Hello from uuidmasterapi!");
+});
 
 app.Run();
 

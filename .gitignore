@@ -1,13 +1,9 @@
 /.vscode
+/UuidMasterApi/appsettings.Development.json
+/UuidMasterApi/appsettings.json
+/UuidMasterApi/appsettings.Production.json
 /UuidMasterApi/bin
 /UuidMasterApi/obj
 /UuidMasterApiTests/bin
 /UuidMasterApiTests/obj
-app.settings.Production.json
-appsettings.Development.json
-appsettings.Development.json
-appsettings.json
-appsettings.Production.json
-docker-compose.debug.yml
-docker-compose.production.yml
 UuidMasterApi.code-workspace
