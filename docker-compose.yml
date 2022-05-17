@@ -3,10 +3,19 @@
 version: '3.4'
 
 services:
+  rabbitmq:
+    image: rabbitmq:3.9-management
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - rabbitmq
   db:
     image: mcr.microsoft.com/mssql/server:2019-latest
-    container_name: uuidmasterapi-db-1
-    hostname: uuidmasterapi-db-1
+    hostname: db
     ports:
       - "1433:1433" # Publishes the port to docker host in order to access db from vscode extension. 
     environment:
@@ -19,7 +28,6 @@ services:
   api:
     depends_on:
       - db
-    image: uuidmasterapi:dev
     build:
       context: ./UuidMasterApi
       dockerfile: Dockerfile
@@ -46,5 +54,11 @@ networks:
   uuidmasterapi:
     name: uuidmasterapi
     driver: bridge
+  rabbitmq:
+    name: rabbitmq
+    driver: bridge
 volumes:
-  db_data:
+  rabbitmq_data: {
+    name: rabbitmq_data
+  }
+  db_data: {}
