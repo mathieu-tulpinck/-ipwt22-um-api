@@ -14,7 +14,7 @@ namespace UuidMasterApi
         {
             modelBuilder.Entity<Resource>()
                 .HasData(
-                new Resource(SourceType.FrontEnd, "user", 1, 1)
+                new Resource(Source.FRONTEND, "Event", 1, 1)
             );
 
             base.OnModelCreating(modelBuilder);
