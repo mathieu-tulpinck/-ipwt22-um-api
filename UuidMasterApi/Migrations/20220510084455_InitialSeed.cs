@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using UuidMasterApi.Enums;
 
 #nullable disable
 
@@ -12,7 +12,7 @@ namespace UuidMasterApi.Migrations
             migrationBuilder.InsertData(
                 table: "Resources",
                 columns: new[] { "Uuid", "EntityType", "EntityVersion", "Source", "SourceEntityId" },
-                values: new object[] { new Guid("1a908081-21d3-4f28-952d-584f4490b3a8"), "user", 1, "FrontEnd", 1 });
+                values: new object[] { new Guid("1a908081-21d3-4f28-952d-584f4490b3a8"), "Organiser", 1, Source.FRONTEND, 1 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

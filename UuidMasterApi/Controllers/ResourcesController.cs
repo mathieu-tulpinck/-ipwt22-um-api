@@ -45,7 +45,7 @@ namespace UuidMasterApi.Controllers
         public async Task<ActionResult<ResourceDto>> GetResource([Required(ErrorMessage = "source field is required.")] string source, [Required(ErrorMessage = "entityType field is required.")] string entityType, [Required(ErrorMessage = "sourceEntityId field is required.")] int sourceEntityId)
         {
             var resourceEntity = await _context.Resources
-                .Where(r => r.Source == Enum.Parse<SourceType>(source))
+                .Where(r => r.Source == Enum.Parse<Source>(source))
                 .Where(r => r.EntityType == entityType)
                 .Where(r => r.SourceEntityId == sourceEntityId)
                 .FirstOrDefaultAsync();

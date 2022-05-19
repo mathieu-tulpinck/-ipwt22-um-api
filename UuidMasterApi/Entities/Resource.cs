@@ -10,7 +10,7 @@ namespace UuidMasterApi.Entities
         public Guid Uuid { get; set; }
         [Required]// Adds a non-nullable constraint to the db schema.
         [Column(TypeName = "nvarchar(24)")]
-        public SourceType Source { get; set; }
+        public Source Source { get; set; }
         [Required]
         [MaxLength(50)]
         public string EntityType { get; set; }// Enum?
@@ -19,7 +19,7 @@ namespace UuidMasterApi.Entities
         [Required]
         public int EntityVersion { get; set; }
 
-        public Resource(SourceType source, string entityType, int sourceEntityId, int entityVersion)
+        public Resource(Source source, string entityType, int sourceEntityId, int entityVersion)
         {
             Uuid = Guid.NewGuid();
             Source = source;
