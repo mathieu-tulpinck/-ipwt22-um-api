@@ -11,7 +11,7 @@ namespace UuidMasterApi.Models
         [MaxLength(50)]
         public string EntityType { get; set; } = string.Empty;
         [Required(ErrorMessage = "sourceEntityId field is required.")]
-        public int SourceEntityId { get; set; }
+        public string SourceEntityId { get; set; } = string.Empty;
         [Required(ErrorMessage = "entityVersion field is required.")]
         public int EntityVersion { get; set; }
     }

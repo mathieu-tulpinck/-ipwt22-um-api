@@ -12,10 +12,10 @@ namespace UuidMasterApi
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Resource>()
-                .HasData(
-                new Resource(Source.FRONTEND, "Event", 1, 1)
-            );
+            modelBuilder.Entity<Resource>();
+            //     .HasData(
+            //     new Resource(Source.FRONTEND, "Event", "1", 1)
+            // );
 
             base.OnModelCreating(modelBuilder);
         }

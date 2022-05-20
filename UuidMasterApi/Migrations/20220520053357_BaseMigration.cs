@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -15,7 +16,7 @@ namespace UuidMasterApi.Migrations
                     Uuid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Source = table.Column<string>(type: "nvarchar(24)", nullable: false),
                     EntityType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    SourceEntityId = table.Column<int>(type: "int", nullable: false),
+                    SourceEntityId = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
                     EntityVersion = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

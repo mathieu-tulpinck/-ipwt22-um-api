@@ -15,11 +15,12 @@ namespace UuidMasterApi.Entities
         [MaxLength(50)]
         public string EntityType { get; set; }// Enum?
         [Required]
-        public int SourceEntityId { get; set; }
+        [MaxLength(32)]
+        public string SourceEntityId { get; set; }
         [Required]
         public int EntityVersion { get; set; }
 
-        public Resource(Source source, string entityType, int sourceEntityId, int entityVersion)
+        public Resource(Source source, string entityType, string sourceEntityId, int entityVersion)
         {
             Uuid = Guid.NewGuid();
             Source = source;

@@ -42,7 +42,7 @@ namespace UuidMasterApi.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult<ResourceDto>> GetResource([Required(ErrorMessage = "source field is required.")] string source, [Required(ErrorMessage = "entityType field is required.")] string entityType, [Required(ErrorMessage = "sourceEntityId field is required.")] int sourceEntityId)
+        public async Task<ActionResult<ResourceDto>> GetResource([Required(ErrorMessage = "source field is required.")] string source, [Required(ErrorMessage = "entityType field is required.")] string entityType, [Required(ErrorMessage = "sourceEntityId field is required.")] string sourceEntityId)
         {
             var resourceEntity = await _context.Resources
                 .Where(r => r.Source == Enum.Parse<Source>(source))
