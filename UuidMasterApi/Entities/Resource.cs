@@ -7,21 +7,48 @@ namespace UuidMasterApi.Entities
     public class Resource
     {
         [Key]
-        public Guid Uuid { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        [Required]
+        [MaxLength(36)]
+        public string Uuid { get; set; } // Not Guid because not unique per row in db.
         [Required]// Adds a non-nullable constraint to the db schema.
         [Column(TypeName = "nvarchar(24)")]
         public Source Source { get; set; }
         [Required]
-        [MaxLength(50)]
-        public string EntityType { get; set; }// Enum?
+        [Column(TypeName = "nvarchar(24)")]
+        public EntityType EntityType { get; set; }
         [Required]
-        public int SourceEntityId { get; set; }
+        [MaxLength(254)] // Max chars in email (RFC).
+        public string SourceEntityId { get; set; }
         [Required]
         public int EntityVersion { get; set; }
 
-        public Resource(Source source, string entityType, int sourceEntityId, int entityVersion)
+        public Resource(Source source, string uuid, EntityType entityType, string sourceEntityId, int entityVersion)
         {
-            Uuid = Guid.NewGuid();
+            Uuid = uuid;
+            Source = source;
+            EntityType = entityType;
+            SourceEntityId = sourceEntityId;
+            EntityVersion = entityVersion;
+        }
+
+        public Resource(Source source, EntityType entityType, string sourceEntityId, int entityVersion)
+        {
+            Uuid = Guid.NewGuid().ToString();
+            Source = source;
+            EntityType = entityType;
+            SourceEntityId = sourceEntityId;
+            EntityVersion = entityVersion;
+        }
+
+
+
+        // Used by UuidMasterApiDbContext
+        public Resource(int id, string uuid, Source source, EntityType entityType, string sourceEntityId, int entityVersion)
+        {
+            Id = id;
+            Uuid = uuid;
             Source = source;
             EntityType = entityType;
             SourceEntityId = sourceEntityId;

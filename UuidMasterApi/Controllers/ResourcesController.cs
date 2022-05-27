@@ -25,15 +25,31 @@ namespace UuidMasterApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ResourceDto>>> GetResources()
         {
-            var resourceEntities = await _context.Resources.ToListAsync();
-            var resourceDtos = _mapper.Map<IEnumerable<ResourceDto>>(resourceEntities);
-            return Ok(resourceDtos);
+            var resourceEntities = await _context.Resources
+                .ToListAsync();
+            return Ok(_mapper.Map<IEnumerable<ResourceDto>>(resourceEntities));
         }
 
-        [HttpGet("{uuid}", Name ="GetResource")]
-        public async Task<ActionResult<ResourceDto>> GetResource(Guid uuid) 
+        [HttpGet("{uuid}")]
+        public async Task<ActionResult<ResourceDto>> GetResources(Guid uuid) 
         {
-            var resourceEntity = await _context.Resources.Where(r => r.Uuid == uuid).FirstOrDefaultAsync();
+            var resourceEntities = await _context.Resources
+                .Where(r => r.Uuid == uuid.ToString())
+                .ToListAsync();
+            if (!resourceEntities.Any()) {
+                return NotFound();
+            }
+
+            return Ok(_mapper.Map<IEnumerable<ResourceDto>>(resourceEntities));
+        }
+
+        [HttpGet("{uuid}/{source}", Name ="GetResource")]
+        public async Task<ActionResult<ResourceDto>> GetResource(Guid uuid, Source source) 
+        {
+            var resourceEntity = await _context.Resources
+                .Where(r => r.Uuid == uuid.ToString())
+                .Where(r => r.Source == source)    
+                .FirstOrDefaultAsync();
             if (resourceEntity == null) {
                 return NotFound();
             }
@@ -42,10 +58,10 @@ namespace UuidMasterApi.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult<ResourceDto>> GetResource([Required(ErrorMessage = "source field is required.")] string source, [Required(ErrorMessage = "entityType field is required.")] string entityType, [Required(ErrorMessage = "sourceEntityId field is required.")] int sourceEntityId)
+        public async Task<ActionResult<ResourceDto>> GetResource([Required(ErrorMessage = "source field is required.")] Source source, [Required(ErrorMessage = "entityType field is required.")] EntityType entityType, [Required(ErrorMessage = "sourceEntityId field is required."), MaxLength(254)] string sourceEntityId)
         {
             var resourceEntity = await _context.Resources
-                .Where(r => r.Source == Enum.Parse<Source>(source))
+                .Where(r => r.Source == source)
                 .Where(r => r.EntityType == entityType)
                 .Where(r => r.SourceEntityId == sourceEntityId)
                 .FirstOrDefaultAsync();
@@ -59,23 +75,51 @@ namespace UuidMasterApi.Controllers
         [HttpPost]
         public async Task<ActionResult<ResourceDto>> CreateResource(ResourceCreateDto resourceCreateDto) 
         {
-            var resourceEntity = _mapper.Map<Resource>(resourceCreateDto); // Assigns uuid to entity.
-            _context.Resources.Add(resourceEntity);
+            var resourceEntityToCreate = _mapper.Map<Resource>(resourceCreateDto); // Assigns uuid to entity.
+            _context.Resources.Add(resourceEntityToCreate);
             await _context.SaveChangesAsync();
-            var resourceDto = _mapper.Map<ResourceDto>(resourceEntity);
+            var resourceDto = _mapper.Map<ResourceDto>(resourceEntityToCreate);
 
             return CreatedAtRoute("GetResource",
                 new {
-                    uuid = resourceEntity.Uuid,
+                    uuid = resourceEntityToCreate.Uuid,
+                    source = resourceEntityToCreate.Source
                 }, 
                 resourceDto
             );
         }
 
-        [HttpPatch("{uuid}")]
-        public async Task<ActionResult> PatchResource(Guid uuid, JsonPatchDocument<ResourceUpdateDto> patchDocument)
+        [HttpPost("{uuid}")]
+        public async Task<ActionResult<ResourceDto>> CreateResource(Guid uuid, ResourceCreateDtoWithUuid resourceCreateDtoWithUuid) 
         {
-            var resourceEntity = await _context.Resources.Where(r => r.Uuid == uuid).FirstOrDefaultAsync();
+            var resourceEntities = await _context.Resources
+                .Where(r => r.Uuid == uuid.ToString())
+                .ToListAsync();
+            if (!resourceEntities.Any()) {
+                return NotFound();
+            }
+            
+            var resourceEntityToCreate = _mapper.Map<Resource>(resourceCreateDtoWithUuid);
+            _context.Resources.Add(resourceEntityToCreate);
+            await _context.SaveChangesAsync();
+            var resourceDto = _mapper.Map<ResourceDto>(resourceEntityToCreate);
+
+            return CreatedAtRoute("GetResource",
+                new {
+                    uuid = resourceEntityToCreate.Uuid,
+                    source = resourceEntityToCreate.Source
+                }, 
+                resourceDto
+            );
+        }
+
+        [HttpPatch("{uuid}/{source}")]
+        public async Task<ActionResult> PatchResource(Guid uuid, Source source, JsonPatchDocument<ResourceUpdateDto> patchDocument)
+        {
+            var resourceEntity = await _context.Resources
+                .Where(r => r.Uuid == uuid.ToString())
+                .Where(r => r.Source == source)
+                .FirstOrDefaultAsync();
             if (resourceEntity == null) {
                 return NotFound();
             }
@@ -96,6 +140,6 @@ namespace UuidMasterApi.Controllers
             return NoContent();
         }
 
-        // Delete action not yet implemented.
+//         // Delete action not yet implemented.
     }
 }

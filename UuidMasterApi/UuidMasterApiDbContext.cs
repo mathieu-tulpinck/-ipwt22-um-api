@@ -12,9 +12,11 @@ namespace UuidMasterApi
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            var uuid = Guid.NewGuid();
             modelBuilder.Entity<Resource>()
                 .HasData(
-                new Resource(Source.FRONTEND, "Event", 1, 1)
+                    new Resource(1, uuid.ToString(), Source.FRONTEND, EntityType.SESSION, "78", 1),
+                    new Resource(2, uuid.ToString(), Source.CRM, EntityType.SESSION, "13", 1)
             );
 
             base.OnModelCreating(modelBuilder);

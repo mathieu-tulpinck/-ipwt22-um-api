@@ -12,15 +12,17 @@ namespace UuidMasterApi.Migrations
                 name: "Resources",
                 columns: table => new
                 {
-                    Uuid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Uuid = table.Column<string>(type: "nvarchar(36)", maxLength: 36, nullable: false),
                     Source = table.Column<string>(type: "nvarchar(24)", nullable: false),
-                    EntityType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    SourceEntityId = table.Column<int>(type: "int", nullable: false),
+                    EntityType = table.Column<string>(type: "nvarchar(24)", nullable: false),
+                    SourceEntityId = table.Column<string>(type: "nvarchar(254)", maxLength: 254, nullable: false),
                     EntityVersion = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Resources", x => x.Uuid);
+                    table.PrimaryKey("PK_Resources", x => x.Id);
                 });
         }
 
