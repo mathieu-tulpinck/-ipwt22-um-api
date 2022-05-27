@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UuidMasterApi;
 
@@ -10,9 +11,10 @@ using UuidMasterApi;
 namespace UuidMasterApi.Migrations
 {
     [DbContext(typeof(UuidMasterApiDbContext))]
-    partial class UuidMasterApiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220527082022_BaseMigration")]
+    partial class BaseMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,26 +55,6 @@ namespace UuidMasterApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Resources");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            EntityType = "SESSION",
-                            EntityVersion = 1,
-                            Source = "FRONTEND",
-                            SourceEntityId = "78",
-                            Uuid = "c49c1ae7-2d59-43b1-8b4a-cdac62df5632"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            EntityType = "SESSION",
-                            EntityVersion = 1,
-                            Source = "CRM",
-                            SourceEntityId = "13",
-                            Uuid = "c49c1ae7-2d59-43b1-8b4a-cdac62df5632"
-                        });
                 });
 #pragma warning restore 612, 618
         }

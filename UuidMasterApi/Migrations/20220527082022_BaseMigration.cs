@@ -24,16 +24,6 @@ namespace UuidMasterApi.Migrations
                 {
                     table.PrimaryKey("PK_Resources", x => x.Id);
                 });
-
-            migrationBuilder.InsertData(
-                table: "Resources",
-                columns: new[] { "Id", "EntityType", "EntityVersion", "Source", "SourceEntityId", "Uuid" },
-                values: new object[] { 1, "SESSION", 1, "FRONTEND", "78", "6c3df037-b316-484b-8a0e-7ec7d00a05a3" });
-
-            migrationBuilder.InsertData(
-                table: "Resources",
-                columns: new[] { "Id", "EntityType", "EntityVersion", "Source", "SourceEntityId", "Uuid" },
-                values: new object[] { 2, "SESSION", 1, "CRM", "13", "6c3df037-b316-484b-8a0e-7ec7d00a05a3" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

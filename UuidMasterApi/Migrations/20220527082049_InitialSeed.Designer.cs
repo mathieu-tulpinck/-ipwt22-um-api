@@ -11,8 +11,8 @@ using UuidMasterApi;
 namespace UuidMasterApi.Migrations
 {
     [DbContext(typeof(UuidMasterApiDbContext))]
-    [Migration("20220527071607_BaseMigration")]
-    partial class BaseMigration
+    [Migration("20220527082049_InitialSeed")]
+    partial class InitialSeed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -64,7 +64,7 @@ namespace UuidMasterApi.Migrations
                             EntityVersion = 1,
                             Source = "FRONTEND",
                             SourceEntityId = "78",
-                            Uuid = "6c3df037-b316-484b-8a0e-7ec7d00a05a3"
+                            Uuid = "c49c1ae7-2d59-43b1-8b4a-cdac62df5632"
                         },
                         new
                         {
@@ -73,7 +73,7 @@ namespace UuidMasterApi.Migrations
                             EntityVersion = 1,
                             Source = "CRM",
                             SourceEntityId = "13",
-                            Uuid = "6c3df037-b316-484b-8a0e-7ec7d00a05a3"
+                            Uuid = "c49c1ae7-2d59-43b1-8b4a-cdac62df5632"
                         });
                 });
 #pragma warning restore 612, 618
