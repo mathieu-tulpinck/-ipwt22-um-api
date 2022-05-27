@@ -1,10 +1,14 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using UuidMasterApi.Enums;
 
 namespace UuidMasterApi.Models
 {
-    public class ResourceCreateDto
+    public class ResourceCreateDtoWithUuid
     {
+        [Required(ErrorMessage = "uuid field is required.")]
+        [TypeConverter(typeof(GuidConverter))]
+        public Guid Uuid { get; set; }
         [Required(ErrorMessage = "source field is required.")]
         public Source Source { get; set; }
         [Required(ErrorMessage = "entityType field is required.")]
