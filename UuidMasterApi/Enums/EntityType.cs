@@ -7,6 +7,7 @@ namespace UuidMasterApi.Enums
     public enum EntityType
     {
         ATTENDEE,
+        ORGANISER,
         SESSION,
         SESSIONATTENDEE
     }

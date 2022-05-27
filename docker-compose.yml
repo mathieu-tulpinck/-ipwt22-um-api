@@ -48,8 +48,6 @@ services:
   #   networks:
   #     - uuidmasterapi
   
-  # specify rabbitmq
-
 networks:
   uuidmasterapi:
     name: uuidmasterapi
