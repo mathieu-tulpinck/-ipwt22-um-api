@@ -18,5 +18,14 @@ namespace UuidMasterApi.Models
         public string SourceEntityId { get; set; } = String.Empty;
         [Required(ErrorMessage = "entityVersion field is required.")]
         public int EntityVersion { get; set; }
+
+        public ResourceCreateDtoWithUuid(Guid uuid, ResourceCreateDto resourceCreateDto)
+        {
+            Uuid = uuid;
+            Source = resourceCreateDto.Source;
+            EntityType = resourceCreateDto.EntityType;
+            SourceEntityId = resourceCreateDto.SourceEntityId;
+            EntityVersion = resourceCreateDto.EntityVersion;
+        }
     }
 }

@@ -90,7 +90,7 @@ namespace UuidMasterApi.Controllers
         }
 
         [HttpPost("{uuid}")]
-        public async Task<ActionResult<ResourceDto>> CreateResource(Guid uuid, ResourceCreateDtoWithUuid resourceCreateDtoWithUuid) 
+        public async Task<ActionResult<ResourceDto>> CreateResource(Guid uuid, ResourceCreateDto resourceCreateDto) 
         {
             var resourceEntities = await _context.Resources
                 .Where(r => r.Uuid == uuid.ToString())
@@ -98,7 +98,8 @@ namespace UuidMasterApi.Controllers
             if (!resourceEntities.Any()) {
                 return NotFound();
             }
-            
+
+            var resourceCreateDtoWithUuid = new ResourceCreateDtoWithUuid(uuid, resourceCreateDto);
             var resourceEntityToCreate = _mapper.Map<Resource>(resourceCreateDtoWithUuid);
             _context.Resources.Add(resourceEntityToCreate);
             await _context.SaveChangesAsync();
